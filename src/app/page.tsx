@@ -4,7 +4,8 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge";
 import { CirclePlus, List, Check, OctagonX, SquarePen, Trash2, ListCheck, Sigma } from 'lucide-react';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,} from "@/components/ui/alert-dialog"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,} from "@/components/ui/alert-dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const Home = () => (
   <main className="w-full h-screen bg-gray-100 flex justify-center items-center">
@@ -31,13 +32,28 @@ const Home = () => (
             <p className="flex-1 px-3 text-sm">Estudar React</p>
 
             <div className="flex items-center gap-2">
-              <SquarePen size={18} className="cursor-pointer" />
-              <Trash2 size={18} className="cursor-pointer mr-2" />
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <SquarePen size={18} className="cursor-pointer" />
+                  </DialogTrigger>
+                <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle><p>Editar tarefa</p></DialogTitle>
+                    </DialogHeader>
 
+                  <div className=" flex gap-3 items-center">
+                      <Input placeholder="Editar Tarefa"/>
+                      <Button className="cursor-pointer">Editar</Button>
+                  </div>
+
+                </DialogContent>
+              </Dialog>            
+              <Trash2 size={18} className="cursor-pointer mr-2" />
             </div>
           </div>
 
         </div>
+
 
         <div className="flex justify-between mt-5">
 
@@ -45,7 +61,22 @@ const Home = () => (
             <ListCheck size={18} />
             <p className="text-xs">Tarefas Concluidas (3/3)</p>
           </div>
-          <Button className="text-xs h-7 cursor-pointer " variant="outline"><Trash2 /> Limpar tarefas concluídas</Button>
+          
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button className="text-xs h-7 cursor-pointer " variant="outline"><Trash2 /> Limpar tarefas concluídas</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>  
+              <AlertDialogHeader>
+                <AlertDialogTitle>Tem certeza que deseja excluir x itens?</AlertDialogTitle>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogAction>Sim</AlertDialogAction>
+                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>    
+
         </div>
 
         <div className="h-2.5 w-full bg-gray-100 mt-3 rounded-md">
@@ -58,25 +89,6 @@ const Home = () => (
 
         </div>
 
-
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant="outline">Show Dialog</Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your account
-                from our servers.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction>Continue</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
 
 
       </CardContent>
